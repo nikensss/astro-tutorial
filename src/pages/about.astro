@@ -1,4 +1,21 @@
 ---
+const title = 'About me';
+
+const identity = {
+  firstName: 'Ricard',
+  country: 'Spain',
+  occupation: 'Node.js developer',
+  hobbies: ['Padel', 'Rust', 'Programming']
+};
+
+// sort hobbies randomly and always pick two (this guarantees no duplicates)
+const twoOfMyHobbies = [...identity.hobbies].sort(() => Math.random() - 0.5).slice(0, 2);
+
+const skills = ['TypeScript', 'JavaScript', 'Node.js', 'HTML/CSS/JS', 'React', 'Bash'];
+
+const motivated = true;
+const finished = false;
+const goal = 3;
 ---
 
 <html lang="en">
@@ -7,7 +24,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>{title}</title>
   </head>
   <body>
     <a href="/">Home</a>
@@ -25,5 +42,26 @@
       This site will update as I complete more of the tutorial, so keep checking back and see how my
       journey is going!
     </p>
+
+    <p>Here are a few facts about me:</p>
+    <ul>
+      <li>My name is {identity.firstName}</li>
+      <li>I live in {identity.country} and I work as a {identity.occupation}.</li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two or my hobbies are: {twoOfMyHobbies[0]} and {twoOfMyHobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>My skills are:</p>
+    <ul>{skills.map((s) => <li>{s}</li>)}</ul>
+
+    {motivated && <p>I am motivated to be learning Astro!</p>}
+
+    {finished && <p>I finished this tutorial</p>}
+
+    {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My hoal is not 3 days</p>}
   </body>
 </html>
